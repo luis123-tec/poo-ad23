@@ -5,6 +5,9 @@
 #include "Peliculas.h"
 #include "Series.h"
 #include "Reviews.h"
+#include "Audiovisual.h"
+
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -12,6 +15,7 @@ using namespace std;
 int main() {
   vector<Pelicula> peliculas; // Vector para almacenar películas
   vector<Serie> series; // Vector para almacenar series
+  
   // Películas y series predefinidas
   Pelicula pelicula1("El Padrino", 1972);
   pelicula1.setReview(Review("Un clásico.", 5));
