@@ -1,4 +1,5 @@
 // Reviews.h
+// No estaba seguro si se habia actualizado el código, igual aquí no hay mucho cambio
 #ifndef REVIEWS_H
 #define REVIEWS_H
 
@@ -45,3 +46,4 @@ int Review::getCalificacion() const {
 }
 
 #endif // REVIEWS_H
+
