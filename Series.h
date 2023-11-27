@@ -4,60 +4,46 @@
 
 /* Lo que investigue sobre el uso de const es que permite que la variable sea constante y no cambie, esto hace que un tipo de dato no cambie a otro*/
 
-#include "Reviews.h"
-#include <iostream>
+#include "Audiovisual.h"
 #include <string>
+#include <iostream>
 
-class Serie {
+class Serie : public AudioVisual {
 private:
-  std::string titulo;
   int temporadas;
-  Review review;
 
 public:
-  Serie(std::string titulo, int temporadas);
+  Serie(std::string titulo, int temporadas, const Review& review);
+  Serie(std::string titulo, int temporadas); // Constructor de main.cpp
   Serie();
-  void setTitulo(std::string nuevoTitulo);
-  std::string getTitulo() const;
   void setTemporadas(int nuevasTemporadas);
   int getTemporadas() const;
-  void setReview(const Review& nuevaReview);
-  Review getReview() const;
-  void mostrarInformacion() const;
+  void mostrarInformacion() const override; // Override indica que este método sobrescribe el método virtual de la clase base
 };
 
 // Implementaciones
-Serie::Serie(std::string titulo, int temporadas) : titulo(titulo), temporadas(temporadas) {}
 
-Serie::Serie() : titulo(""), temporadas(0) {}
+// Constructor de la clase Serie que implementa la composición.
+// Esto es porque estamos creando un objeto Review dentro de este constructor,
+// lo que significa que el Review es parte integral de la Serie y su ciclo de vida.
 
-void Serie::setTitulo(std::string nuevoTitulo) {
-  titulo = nuevoTitulo;
-}
+Serie::Serie(std::string titulo, int temporadas, const Review& review)
+  : AudioVisual(titulo, review), temporadas(temporadas) {}
 
-std::string Serie::getTitulo() const {
-  return titulo;
-}
+Serie::Serie(std::string titulo, int temporadas)
+: AudioVisual(titulo, Review()), temporadas(temporadas) {}
+
+Serie::Serie() : AudioVisual(), temporadas(0) {}
 
 void Serie::setTemporadas(int nuevasTemporadas) {
   temporadas = nuevasTemporadas;
 }
-
 int Serie::getTemporadas() const {
   return temporadas;
 }
-
-void Serie::setReview(const Review& nuevaReview) {
-  review = nuevaReview;
-}
-
-Review Serie::getReview() const {
-  return review;
-}
-
 void Serie::mostrarInformacion() const {
-  std::cout << "Serie: " << titulo << " (" << temporadas << " temporadas)" << std::endl;
+  AudioVisual::mostrarInformacion();
+  std::cout << "Serie: " << getTitulo() << " (" << temporadas << " temporadas)" << std::endl;
   review.mostrarReview();
 }
-
 #endif // SERIES_H
